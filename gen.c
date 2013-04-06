@@ -85,6 +85,8 @@ void gen_prime(unsigned int b_size, mpz_t res){
 		mpz_setbit(res,b_size - 1);
 		mpz_setbit(res,b_size - 2);
 	}while(rabin_miller(res,20,state) == 0);
+
+	gmp_randclear(state);
 }
 
 void modular_inverse(mpz_t u, mpz_t v, mpz_t res){
@@ -132,7 +134,7 @@ void modular_inverse(mpz_t u, mpz_t v, mpz_t res){
 
 int rabin_miller(mpz_t n, unsigned int t, gmp_randstate_t rand_state){
 
-	mpz_t a, n_minus, d, a_power;
+	mpz_t a;
 	int res = PRIME, i;
 
 	/* skrati cas */
@@ -148,20 +150,20 @@ int rabin_miller(mpz_t n, unsigned int t, gmp_randstate_t rand_state){
 		do{
 			mpz_urandomm(a,rand_state, n);
 		} while(mpz_sgn(a) == 0); /* nesmie byt 0 */
-		if(rabin_miller_test(n,a,n_minus,d,a_power) == COMPOSITE){
+		if(rabin_miller_test(n,a) == COMPOSITE){
 			res = COMPOSITE;
 			break;
 		}
 	}
 
-	mpz_clear(a);mpz_clear(a_power);
-	mpz_clear(d);mpz_clear(n_minus);
+	mpz_clear(a);
 
 	return res;
 }
 
-int rabin_miller_test(mpz_t n, mpz_t a, mpz_t n_minus, mpz_t d, mpz_t a_power){
+int rabin_miller_test(mpz_t n, mpz_t a){
 
+	mpz_t n_minus, d, a_power;
 	int j, s = 0;
 
 	/* d(n_minus) = n - 1 */
@@ -179,11 +181,19 @@ int rabin_miller_test(mpz_t n, mpz_t a, mpz_t n_minus, mpz_t d, mpz_t a_power){
 	mod_exp(a,d,n,a_power);
 
 	if(mpz_cmp_ui(a_power,1) == 0){
+		mpz_clear(n_minus);
+		mpz_clear(d);
+		mpz_clear(a_power);
+
 		return PRIME;
 	}
 
 	for (j = 0; j < s - 1; ++j) {
 		if(mpz_cmp(a_power,n_minus) == 0){
+			mpz_clear(n_minus);
+			mpz_clear(d);
+			mpz_clear(a_power);
+
 			return PRIME;
 		}
 
@@ -192,8 +202,16 @@ int rabin_miller_test(mpz_t n, mpz_t a, mpz_t n_minus, mpz_t d, mpz_t a_power){
 	}
 
 	if(mpz_cmp(a_power,n_minus) == 0){
+		mpz_clear(n_minus);
+		mpz_clear(d);
+		mpz_clear(a_power);
+
 		return PRIME;
 	}
+
+	mpz_clear(n_minus);
+	mpz_clear(d);
+	mpz_clear(a_power);
 
 	return COMPOSITE;
 }

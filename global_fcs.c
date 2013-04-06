@@ -34,4 +34,6 @@ void mod_exp_ui(mpz_t z, unsigned long e_ui, mpz_t m, mpz_t res){
 	}else{
 		mod_exp(z,e,m,res);
 	}
+
+	mpz_clear(e);
 }
