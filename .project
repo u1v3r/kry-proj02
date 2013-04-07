@@ -23,4 +23,10 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>msieve</name>
+			<value>file:/home/rdy/cdt/workspace/kry-proj02/msieve-1.51/include</value>
+		</variable>
+	</variableList>
 </projectDescription>

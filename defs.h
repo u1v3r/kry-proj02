@@ -2,7 +2,7 @@
 #define DEFS_H_
 
 
-#define DEBUG
+#define DEBUGA
 
 
 #endif /* DEFS_H_ */

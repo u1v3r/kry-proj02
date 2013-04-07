@@ -1,3 +1,7 @@
 *.o
 kry
 *.out
+*.gz
+*.qo
+*.no
+*.data
