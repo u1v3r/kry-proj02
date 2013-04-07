@@ -28,5 +28,5 @@ gen.o: gen.h gen.c
 	$(CC) $(CFLAGS) -c -o gen.o gen.c
 
 clean: $(PNAME).c
-	rm -f $(PNAME) *.o *.out *.sum
+	rm -f $(PNAME) *.o *.out *.sum *.dat
 	#make clean -C $(MSIEVE_SUBDIR)
