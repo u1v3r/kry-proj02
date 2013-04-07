@@ -89,7 +89,7 @@ void gen_prime(unsigned int b_size, mpz_t res){
 int rabin_miller(mpz_t n, unsigned int t, gmp_randstate_t rand_state){
 
 	mpz_t a;
-	int res = PRIME, i;
+	unsigned int res = PRIME, i;
 
 	/* skrati cas */
 	if (mpz_even_p(n)) return COMPOSITE;

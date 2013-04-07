@@ -86,8 +86,8 @@ static msieve_obj *init_msieve_object(mpz_t input_integer){
 
 	/* nic nevypisovat */
 	flags &= ~(MSIEVE_FLAG_USE_LOGFILE | MSIEVE_FLAG_LOG_TO_STDOUT);
+	flags |= MSIEVE_FLAG_NFS_SIEVE;
 
-	/* pocet vlakien == pocet cpu */
 	num_threads = (int)sysconf(_SC_NPROCESSORS_ONLN);
 
 	get_random_seeds(&seed1,&seed2);
@@ -104,6 +104,7 @@ static msieve_obj *init_msieve_object(mpz_t input_integer){
 			cpu, cache_size1, cache_size2,
 			num_threads, which_gpu,
 			nfs_args);
+
 
 	return obj;
 }

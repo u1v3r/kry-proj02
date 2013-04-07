@@ -2,12 +2,14 @@
 
 CC = gcc
 PNAME = kry
-CFLAGS = -Wall -march=core2 -pedantic -lgmp -lm -ldl -lz -lpthread -I$(MSIEVE_SUBDIR)/include -pg -g 
+CFLAGS = -Wall -W -march=core2 -O3 -pedantic -lgmp -lm -ldl -lz -lpthread -I$(MSIEVE_SUBDIR)/include
 MSIEVE_SUBDIR = msieve
 
 objects = gen.o enc_dec.o global_fcs.o crack.o
 
-rebuild:	clean msieve_build all
+rebuild: clean all
+
+rebuild_all: clean clean_m msieve_build all
 
 all: $(PNAME).c $(objects)
 	$(CC) $(CFLAGS) -o $(PNAME) $(PNAME).c $(objects) $(MSIEVE_SUBDIR)/libmsieve.a
@@ -29,4 +31,6 @@ gen.o: gen.h gen.c
 
 clean: $(PNAME).c
 	rm -f $(PNAME) *.o *.out *.sum *.dat
-	#make clean -C $(MSIEVE_SUBDIR)
+	
+clean_m:
+	make clean -C $(MSIEVE_SUBDIR)
