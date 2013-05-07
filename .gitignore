@@ -6,3 +6,7 @@ kry
 *.no
 *.dat
 libmsieve.a
+*.pdf
+*.rar
+*.odt
+*.sh

@@ -86,7 +86,6 @@ static msieve_obj *init_msieve_object(mpz_t input_integer){
 
 	/* nic nevypisovat */
 	flags &= ~(MSIEVE_FLAG_USE_LOGFILE | MSIEVE_FLAG_LOG_TO_STDOUT);
-	flags |= MSIEVE_FLAG_NFS_SIEVE;
 
 	num_threads = (int)sysconf(_SC_NPROCESSORS_ONLN);
 

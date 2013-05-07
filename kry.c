@@ -2,8 +2,6 @@
 
 #include "kry.h"
 
-#define ERROR_MSG "bad params format\n"
-
 int main(int argc, char **argv) {
 
 	if(argc < 3 || argc > 5){
